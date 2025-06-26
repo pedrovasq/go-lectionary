@@ -21,9 +21,19 @@
     <div class="reveal">
       <div class="slides">
         {{ template "title.html" . }}
-        {{ template "first_reading.html" . }}
-        {{ template "second_reading.html" . }}
-        {{ template "gospel_reading.html" . }} 
+        {{ template "blank_slide.html" . }}
+        {{ template "first_reading.html" .FirstReading }}
+        {{ template "blank_slide.html" . }}
+        {{ template "psalm.html" .Psalm }}
+        {{ template "blank_slide.html" . }}
+        {{ if .SecondReading }}
+          {{ template "second_reading.html" .SecondReading }}
+          {{ template "blank_slide.html" . }}
+        {{ end }}
+        {{ template "acclamation.html" .Acclamation }}
+        {{ template "blank_slide.html" . }}
+        {{ template "gospel_reading.html" .Gospel }} 
+        {{ template "blank_slide.html" . }}
       </div>
     </div>
     <script src="lib/reveal.js">

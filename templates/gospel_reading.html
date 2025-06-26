@@ -19,7 +19,7 @@
     <div class="sl-block centered-block">
       <div class="sl-block-content">
         <span style="font-size:2.0em">
-          {{ .GospelTitle }}
+          {{ .Title }}
           </br>
           </br>
           R. Gloria a ti, Señor.
@@ -29,14 +29,14 @@
     <div class="sl-block centered-block" style="top: 661px;">
       <div class="sl-block-content">
         <span style="font-size:0.9em">
-          {{ .GospelReference }}
+          {{ .Reference }}
         </span>
       </div>
     </div>
   </section>
 
   <!-- Slides 3...N: Gospel Content -->
-  {{ range .GospelParagraphs }}
+  {{ range .Chunks }}
   <section>
     <div class="sl-block centered-block">
       <div class="sl-block-content">

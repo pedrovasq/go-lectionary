@@ -6,20 +6,20 @@
     <div class="sl-block centered-block">
       <div class="sl-block-content">
         <span style="font-size:2.0em">
-          {{ .SecondReadingTitle }} 
+          {{ .Title }} 
         </span>
       </div>
     </div>
     <div class="sl-block centered-block" style="top: 661px;">
       <div class="sl-block-content">
         <span style="font-size:0.9em">
-          {{ .SecondReadingReference }}
+          {{ .Reference }}
         </span>
       </div>
     </div>
   </section>
   <!-- Slides 2...N: Reading Content (Paragraphs or Chunks) -->
-  {{ range .SecondReadingParagraphs }}
+  {{ range .Chunks }}
   <section>
     <div class="sl-block centered-block">
       <div class="sl-block-content">

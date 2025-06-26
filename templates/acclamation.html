@@ -1,0 +1,26 @@
+{{ define "acclamation.html" }}
+<section data-section-type="acclamation" class="stack">
+  {{ $ref := .Reference }}
+  {{ range $index, $chunk := .Chunks }}
+  <section>
+    <div class="sl-block centered-block">
+      <div class="sl-block-content">
+        <span style="font-size:2.0em">
+          {{ $chunk }}
+        </span>
+      </div>
+    </div>
+    {{ if eq $index 1 }}
+    <div class="sl-block centered-block" style="top: 661px;">
+      <div class="sl-block-content">
+        <span style="font-size:0.9em">
+          {{ $ref }}
+        </span>
+      </div>
+    </div>
+    {{ end }}
+  </section>
+  {{ end }}
+</section>
+{{ end }}
+
