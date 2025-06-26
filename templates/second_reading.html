@@ -1,0 +1,48 @@
+
+{{ define "second_reading.html" }}
+<section data-section-type="second-reading" class="stack">
+  <!-- Slide 1: Second Reading Title -->
+  <section>
+    <div class="sl-block centered-block">
+      <div class="sl-block-content">
+        <span style="font-size:2.0em">
+          {{ .SecondReadingTitle }} 
+        </span>
+      </div>
+    </div>
+    <div class="sl-block centered-block" style="top: 661px;">
+      <div class="sl-block-content">
+        <span style="font-size:0.9em">
+          {{ .SecondReadingReference }}
+        </span>
+      </div>
+    </div>
+  </section>
+  <!-- Slides 2...N: Reading Content (Paragraphs or Chunks) -->
+  {{ range .SecondReadingParagraphs }}
+  <section>
+    <div class="sl-block centered-block">
+      <div class="sl-block-content">
+        <span style="font-size:2.0em">
+          {{ . }}
+        </span>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+  <!-- Final Slide: Reading Response -->
+  <section>
+    <div class="sl-block centered-block">
+      <div class="sl-block-content">
+        <span style="font-size:2.0em">
+          Palabra de Dios.
+          </br> 
+          </br> 
+          R: Te alabamos, Señor.
+        </span>
+      </div>
+    </div>
+  </section>
+</section>
+
+{{ end }}

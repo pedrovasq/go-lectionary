@@ -1,0 +1,38 @@
+.centered-block {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 960px; /* or your desired width */
+  text-align: center;
+}
+
+.content-block {
+  font-size:2.0em;
+}
+
+.title-flex-container {
+  display: flex;
+  flex-direction: row;            /* Make them align horizontally */
+  justify-content: center;        /* Center the whole block horizontally */
+  align-items: center;            /* Vertically center text and image */
+  gap: 2em;                       /* Space between title and image */
+  flex-wrap: wrap;                /* Allow wrapping on small screens */
+  width: 100%;
+}
+
+.title-slide .title-text h1 {
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;  /* Adjust if needed */
+  max-width: 600px;
+  margin: 0;
+}
+
+.title-slide .title-image img {
+  max-height: 400px;
+  max-width: 300px;
+  display: block;
+}
+

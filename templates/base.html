@@ -1,0 +1,75 @@
+{{ define "base.html" }}
+
+<!DOCTYPE html>
+<html class="sl-root decks export offline loaded">
+  <head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, minimal-ui" name="viewport"/>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta content="yes" name="mobile-web-app-capable"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+    <link href='data:application/manifest+json,{"display": "standalone", "name": "Misa-06/27/25"}' rel="manifest"/>
+    <title>
+      Misa-06/27/25
+    </title>
+    <meta content="La Misa de Hoy" name="description"/>
+    <link href="lib/offline-v2.css" rel="stylesheet" type="text/css"/>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body class="reveal-viewport theme-font-montserrat theme-color-black-blue">
+    <div class="reveal">
+      <div class="slides">
+        {{ template "title.html" . }}
+        {{ template "first_reading.html" . }}
+        {{ template "second_reading.html" . }}
+        {{ template "gospel_reading.html" . }} 
+      </div>
+    </div>
+    <script src="lib/reveal.js">
+    </script>
+    <script src="lib/reveal-plugins.js">
+    </script>
+    <script src="lib/offline.js">
+    </script>
+    <!-- Initialize the presentation -->
+    <script>
+      Reveal.initialize({
+        width: 1280,
+        height: 720,
+        margin: 0.05,
+
+
+        hash: true,
+        controls: false,
+        progress: false,
+        mouseWheel: false,
+        showNotes: false,
+        slideNumber: false,
+        fragmentInURL: true,
+
+        autoSlide: 0,
+        autoSlideStoppable: true,
+
+        scrollActivationWidth: null,
+
+        center: false,
+        shuffle: false,
+        loop: false,
+        rtl: false,
+        navigationMode: "linear",
+
+        transition: "fade",
+        backgroundTransition: "fade",
+
+        highlight: {
+          escapeHTML: false
+        },
+
+        plugins: [ RevealZoom, RevealNotes, RevealMarkdown, RevealHighlight ]
+      });
+    </script>
+  </body>
+</html>
+
+{{ end }}

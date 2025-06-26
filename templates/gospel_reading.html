@@ -1,0 +1,67 @@
+{{ define "gospel_reading.html" }}
+
+<section data-section-type="gospel-reading" class="stack">
+
+  <!-- Slide 1 & 2: Gospel Proclamation Dialogue -->
+  <section>
+    <div class="sl-block centered-block">
+      <div class="sl-block-content">
+        <span style="font-size:2.0em">
+          El Señor esté con ustedes.
+          </br> 
+          </br> 
+          R. Y con tu espíritu.
+        </span>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="sl-block centered-block">
+      <div class="sl-block-content">
+        <span style="font-size:2.0em">
+          {{ .GospelTitle }}
+          </br>
+          </br>
+          R. Gloria a ti, Señor.
+        </span>
+      </div>
+    </div>
+    <div class="sl-block centered-block" style="top: 661px;">
+      <div class="sl-block-content">
+        <span style="font-size:0.9em">
+          {{ .GospelReference }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slides 3...N: Gospel Content -->
+  {{ range .GospelParagraphs }}
+  <section>
+    <div class="sl-block centered-block">
+      <div class="sl-block-content">
+        <span style="font-size:2.0em">
+          {{ . }}
+        </span>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+  <!-- Final Slide: Reading Response -->
+  <section>
+    <div class="sl-block centered-block">
+      <div class="sl-block-content">
+        <span style="font-size:2.0em">
+          Palabra del Señor.
+          </br> 
+          </br> 
+          R. Gloria a ti, Señor Jesús.
+        </span>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+{{ end }}
