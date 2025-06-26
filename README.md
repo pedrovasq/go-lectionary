@@ -40,16 +40,16 @@ This Go project automatically generates Reveal.js-compatible HTML slides for the
 
 ---
 
-## ✅ How It Works
+## How It Works
 
-1. ✅ Fetches the Mass reading page from **usccb.org** for the given date.
-2. ✅ Parses each Lectionary section (Readings, Psalm, Acclamation, Gospel).
-3. ✅ Splits content into multiple slide-friendly chunks.
-4. ✅ Renders all sections into a single Reveal.js slide deck.
+1. Fetches the Mass reading page from **usccb.org** for the given date.
+2. Parses each Lectionary section (Readings, Psalm, Acclamation, Gospel).
+3. Splits content into multiple slide-friendly chunks.
+4. Renders all sections into a single Reveal.js slide deck.
 
 ---
 
-## ✅ Running the Program
+## Running the Program
 
 ```bash
 go run build_slides.go
@@ -57,12 +57,12 @@ go run build_slides.go
 
 This will generate:
 
-- ✅ `slides.html` → Your finished slide deck
-- ✅ `lectionary.json` → Debug/export of parsed lectionary data
+- `slides.html` → Your finished slide deck
+- `lectionary.json` → Debug/export of parsed lectionary data
 
 ---
 
-## ✅ Customizing the Date
+## Customizing the Date
 
 Right now, the target date URL is hardcoded inside `main()`:
 
@@ -74,23 +74,23 @@ You can change the URL to the desired day from the USCCB site.
 
 ---
 
-## ✅ Upcoming Improvements
+## Upcoming Improvements
 
-- [ ] ✅ **English language support**
-- [ ] ✅ Dynamic date generation (get today’s date automatically)
-- [ ] ✅ CLI flags for choosing output file and date
-- [ ] ✅ Support for other liturgical seasons or special Mass types
-- [ ] ✅ Improved styling and layout customization for slides
+- [ ] **English language support**
+- [ ] Dynamic date generation (get today’s date automatically)
+- [ ] CLI flags for choosing output file and date
+- [ ] Support for other liturgical seasons or special Mass types
+- [ ] Improved styling and layout customization for slides
 
 ---
 
-## ✅ Requirements
+## Requirements
 
 - Go 1.18+
 - Internet connection (to fetch live readings from USCCB)
 
 ---
 
-## ✅ License
+## License
 
 MIT License – For non-commercial, educational, and liturgical use.
