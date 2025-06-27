@@ -2,13 +2,9 @@ package main
 
 import (
 	"html"
-    "html/template"
     "fmt"
     "net/http"
-    "os"
-    "encoding/json"
     "strings"
-    // "time"
 	"regexp"
 
 	"github.com/PuerkitoBio/goquery"
@@ -151,26 +147,32 @@ func splitByPunctuationAndLength(rawHtml string) []string {
 		}
 	})
 
-	// Split into chunks based on punctuation + maxChars
-	var chunks []string
-	sentences := strings.FieldsFunc(text, func(r rune) bool {
-		return r == '.' || r == ';' || r == '?' || r == '!'
-	})
+	// ✅ Regex to find sentence-ending punctuation followed by space or end of string or closing quote
+	re := regexp.MustCompile(`([.?!;]["”»\')]?\s+)`)
 
-	var currentChunk strings.Builder
-	for _, sentence := range sentences {
-		sentence = strings.TrimSpace(sentence)
-		if sentence == "" {
-			continue
+	parts := re.Split(text, -1)
+	delimiters := re.FindAllString(text, -1)
+
+	var sentences []string
+	for i, part := range parts {
+		if part = strings.TrimSpace(part); part != "" {
+			if i < len(delimiters) {
+				sentences = append(sentences, part+strings.TrimSpace(delimiters[i]))
+			} else {
+				sentences = append(sentences, part)
+			}
 		}
-		sentence += ". "
+	}
 
+	var chunks []string
+	var currentChunk strings.Builder
+
+	for _, sentence := range sentences {
 		if currentChunk.Len()+len(sentence) > maxChars && currentChunk.Len() > 0 {
 			chunks = append(chunks, strings.TrimSpace(currentChunk.String()))
 			currentChunk.Reset()
 		}
-
-		currentChunk.WriteString(sentence)
+		currentChunk.WriteString(sentence + " ")
 	}
 
 	if currentChunk.Len() > 0 {
@@ -247,51 +249,4 @@ func stripHTML(input string) string {
     return html.UnescapeString(re.ReplaceAllString(input, ""))
 }
 
-func main() {
-	url := "https://bible.usccb.org/es/bible/lecturas/062625.cfm"
-
-	// ✅ Fetch Lectionary from USCCB
-	lectionary, err := fetchLectionary(url)
-	if err != nil {
-		panic(err)
-	}
-
-	// ✅ Save JSON for debugging
-	jsonData, err := json.MarshalIndent(lectionary, "", "  ")
-	if err != nil {
-		panic(err)
-	}
-	os.WriteFile("lectionary.json", jsonData, 0644)
-	fmt.Println("Lectionary saved to lectionary.json")
-
-	// ✅ Parse templates
-	tmpl, err := template.ParseFiles(
-		"templates/base.html",
-		"templates/blank_slide.html",
-		"templates/title.html",
-		"templates/first_reading.html",
-		"templates/psalm.html",
-		"templates/second_reading.html",
-		"templates/acclamation.html",
-		"templates/gospel_reading.html",
-	)
-	if err != nil {
-		panic(err)
-	}
-
-	// ✅ Create output HTML file
-	outputFile, err := os.Create("slides.html")
-	if err != nil {
-		panic(err)
-	}
-	defer outputFile.Close()
-
-	// ✅ Execute main template, passing in the full Lectionary struct
-	err = tmpl.ExecuteTemplate(outputFile, "base.html", lectionary)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("Slides generated as slides.html")
-}
 
