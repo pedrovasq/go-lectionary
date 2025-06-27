@@ -10,7 +10,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-const maxChars = 215
+const maxChars = 225
 
 type Lection struct {
     Title     string   `json:"title"`
@@ -104,7 +104,6 @@ func parseLection(doc *goquery.Document, targetHeading string) (Lection, error) 
 			} else {
 				lection.Title = formatTitle(reference)
 			}
-			fmt.Printf("\nTitle: %s\n", lection.Title)
 
 			lection.Reference = reference
 
@@ -157,7 +156,7 @@ func splitByPunctuationAndLength(rawHtml string) []string {
 		}
 	})
 
-	// ✅ Regex to find sentence-ending punctuation followed by space or end of string or closing quote
+	// Regex to find sentence-ending punctuation followed by space, quote, or end
 	re := regexp.MustCompile(`([.?!;]["”»\')]?\s+)`)
 
 	parts := re.Split(text, -1)
@@ -178,10 +177,49 @@ func splitByPunctuationAndLength(rawHtml string) []string {
 	var currentChunk strings.Builder
 
 	for _, sentence := range sentences {
+		sentence = strings.TrimSpace(sentence)
+		if sentence == "" {
+			continue
+		}
+
+		if len(sentence) > maxChars {
+			// Flush current chunk first
+			if currentChunk.Len() > 0 {
+				chunks = append(chunks, strings.TrimSpace(currentChunk.String()))
+				currentChunk.Reset()
+			}
+
+			// Break the long sentence into multiple hard-split chunks
+			start := 0
+			for start < len(sentence) {
+				end := start + maxChars
+				if end >= len(sentence) {
+					end = len(sentence)
+				} else {
+					// Try to break at the last space within the limit
+					lastSpace := strings.LastIndex(sentence[start:end], " ")
+					if lastSpace != -1 {
+						end = start + lastSpace
+					}
+				}
+
+				chunks = append(chunks, strings.TrimSpace(sentence[start:end]))
+				start = end
+
+				// Skip any whitespace at start of next chunk
+				for start < len(sentence) && sentence[start] == ' ' {
+					start++
+				}
+			}
+
+			continue
+		}
+
 		if currentChunk.Len()+len(sentence) > maxChars && currentChunk.Len() > 0 {
 			chunks = append(chunks, strings.TrimSpace(currentChunk.String()))
 			currentChunk.Reset()
 		}
+
 		currentChunk.WriteString(sentence + " ")
 	}
 
