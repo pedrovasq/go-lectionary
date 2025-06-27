@@ -12,16 +12,16 @@ var titleCaser = cases.Title(language.Spanish)
 
 var bookTypes = map[string]string{
 	// Old Testament Books
-	"génesis":        "book",
-	"éxodo":          "book",
-	"levítico":       "book",
-	"números":        "book",
-	"deuteronomio":   "book",
-	"isaías":         "prophet",
-	"jeremías":       "prophet",
-	"ezequiel":       "prophet",
-	"daniel":         "prophet",
-	"salmo":          "psalm",
+	"génesis":        		"book",
+	"éxodo":          		"book",
+	"levítico":       		"book",
+	"números":        		"book",
+	"deuteronomio":   		"book",
+	"isaías":         		"prophet",
+	"jeremías":       		"prophet",
+	"ezequiel":       		"prophet",
+	"daniel":         		"prophet",
+	"salmo responsorial":	"psalm",
 
 	// New Testament Letters
 	"romanos":        "letter",

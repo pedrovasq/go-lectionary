@@ -95,8 +95,18 @@ func parseLection(doc *goquery.Document, targetHeading string) (Lection, error) 
 		if header == target {
 			found = true
 
-			lection.Title = strings.TrimSpace(s.Find(".content-header h3.name").Text())
-			lection.Reference = strings.TrimSpace(s.Find(".content-header .address").Text())
+			rawTitle := strings.TrimSpace(s.Find(".content-header h3.name").Text())
+			reference := strings.TrimSpace(s.Find(".content-header .address").Text())
+
+			// ✅ Conditionally format title (skip for Psalm and Acclamation)
+			if strings.Contains(strings.ToLower(rawTitle), "salmo") || strings.Contains(strings.ToLower(rawTitle), "aclamación") {
+				lection.Title = rawTitle
+			} else {
+				lection.Title = formatTitle(reference)
+			}
+			fmt.Printf("\nTitle: %s\n", lection.Title)
+
+			lection.Reference = reference
 
 			// Get raw HTML inside <p> tag
 			html, err := s.Find(".content-body").Html()
@@ -104,7 +114,7 @@ func parseLection(doc *goquery.Document, targetHeading string) (Lection, error) 
 				return true // Skip this block if error
 			}
 
-			lection.Chunks = lectionChunkify(lection.Title, html)
+			lection.Chunks = lectionChunkify(rawTitle, html)
 
 			return false
 		}

@@ -42,14 +42,14 @@ func main() {
 
 	// ✅ Parse templates
 	tmpl, err := template.ParseFiles(
-		"templates/base.html",
-		"templates/blank_slide.html",
-		"templates/title.html",
-		"templates/first_reading.html",
-		"templates/psalm.html",
-		"templates/second_reading.html",
-		"templates/acclamation.html",
-		"templates/gospel_reading.html",
+		"ui/templates/base.html",
+		"ui/templates/blank_slide.html",
+		"ui/templates/title.html",
+		"ui/templates/first_reading.html",
+		"ui/templates/psalm.html",
+		"ui/templates/second_reading.html",
+		"ui/templates/acclamation.html",
+		"ui/templates/gospel_reading.html",
 	)
 	if err != nil {
 		panic(err)
